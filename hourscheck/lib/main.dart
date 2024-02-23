@@ -4,10 +4,12 @@ import 'package:hourscheck/pages/home.dart';
 import 'package:hourscheck/style/theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // Root of the application
   @override
   Widget build(BuildContext context) {
