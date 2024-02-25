@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hourscheck/pages/calendar.dart';
 import 'package:hourscheck/pages/money.dart';
 
 class Home extends StatefulWidget {
@@ -18,7 +19,8 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Center(child: Text("Bienvenido")),
+        title: const Text("Bienvenido"),
+        centerTitle: true,
         actions: [
           IconButton(
               onPressed: () {
@@ -27,11 +29,12 @@ class _HomeState extends State<Home> {
               icon: const Icon(Icons.settings))
         ],
       ),
+      extendBody: true,
       body: Padding(
           padding: EdgeInsets.all(16),
           child: PageView(
             controller: pageController,
-            children: [Money()],
+            children: [Calendar(), Money()],
           )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
@@ -47,12 +50,14 @@ class _HomeState extends State<Home> {
           height: kBottomNavigationBarHeight,
           child: BottomNavigationBar(
             onTap: (index) {
-              _selectedItem = index;
-              pageController.jumpToPage(_selectedItem);
+              setState(() {
+                _selectedItem = index;
+                pageController.jumpToPage(_selectedItem);
+              });
             },
             type: BottomNavigationBarType.fixed,
             backgroundColor: const Color.fromARGB(255, 23, 54, 109),
-            selectedItemColor: Color.fromARGB(255, 57, 214, 253),
+            selectedItemColor: const Color.fromARGB(255, 57, 214, 253),
             unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
             currentIndex: _selectedItem,
             items: const [
