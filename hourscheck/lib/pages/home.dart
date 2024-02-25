@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hourscheck/pages/money.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -8,6 +10,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late int _selectedItem = 0;
+  final PageController pageController = PageController(initialPage: 0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +27,42 @@ class _HomeState extends State<Home> {
               icon: const Icon(Icons.settings))
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          children: [],
+      body: Padding(
+          padding: EdgeInsets.all(16),
+          child: PageView(
+            controller: pageController,
+            children: [Money()],
+          )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
         ),
       ),
-      bottomNavigationBar: Padding(padding: ),
+      bottomNavigationBar: BottomAppBar(
+        notchMargin: 5.0,
+        clipBehavior: Clip.antiAlias,
+        child: SizedBox(
+          height: kBottomNavigationBarHeight,
+          child: BottomNavigationBar(
+            onTap: (index) {
+              _selectedItem = index;
+              pageController.jumpToPage(_selectedItem);
+            },
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: const Color.fromARGB(255, 23, 54, 109),
+            selectedItemColor: Color.fromARGB(255, 57, 214, 253),
+            unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
+            currentIndex: _selectedItem,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(CupertinoIcons.money_dollar), label: '')
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
