@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
   Calendar({Key? key}) : super(key: key);
@@ -10,6 +11,9 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
-    return Text("calendar");
+    return TableCalendar(
+        focusedDay: DateTime.now(),
+        firstDay: DateTime.utc(1900, 1, 1),
+        lastDay: DateTime.utc(2600, 1, 1));
   }
 }
