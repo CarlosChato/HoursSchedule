@@ -9,11 +9,26 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return TableCalendar(
-        focusedDay: DateTime.now(),
-        firstDay: DateTime.utc(1900, 1, 1),
-        lastDay: DateTime.utc(2600, 1, 1));
+      focusedDay: _focusedDay,
+      firstDay: DateTime.utc(1900, 1, 1),
+      lastDay: DateTime.utc(2600, 1, 1),
+      calendarFormat: _calendarFormat,
+      startingDayOfWeek: StartingDayOfWeek.monday,
+      onFormatChanged: (format) {
+        setState(() {
+          if (_calendarFormat != format) {
+            _calendarFormat = format;
+          }
+        });
+      },
+      onDaySelected: (selectedDay, focusedDay) {
+        _focusedDay = focusedDay;
+      },
+    );
   }
 }
