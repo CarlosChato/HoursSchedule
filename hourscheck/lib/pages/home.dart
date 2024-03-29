@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hourscheck/pages/calendar.dart';
 import 'package:hourscheck/pages/money.dart';
+import 'package:hourscheck/tools/add_event.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -38,7 +39,9 @@ class _HomeState extends State<Home> {
           )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          addEvent(context);
+        },
         child: Icon(
           Icons.add,
         ),
